@@ -1,0 +1,94 @@
+<section class="py-5 bg-light min-vh-100 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+
+        <div class="card shadow-sm border-0 rounded-3">
+
+          <div class="card-body p-4 p-md-5">
+
+            <!-- Encabezado Coca-Cola -->
+            <div class="text-center mb-4">
+
+
+        
+
+              <h2 class="text-muted small">
+                Ingresa con usuario y contraseña para acceder a cuenta de usuario y poder ver los posts.
+              </h2>
+              <h3> Es necesario iniciar sesion para poder ver los posts</h3>
+
+            </div>
+
+
+            <form [formGroup]="formulario" (ngSubmit)="envio()">
+
+              <!-- Correo -->
+              <div class="mb-3">
+
+                <label for="usuario" class="form-label fw-semibold">
+                 Usuario
+                </label>
+
+                <input
+                  type="text"
+                  id="usuario"
+                  class="form-control"
+                  placeholder="ejemplo: D4V1D"
+                  formControlName="usuario"
+                  [class.is-invalid]="invalido('usuario')"
+                >
+
+                @if (invalido('usuario')) {
+                  <div class="invalid-feedback">
+                    Ingrese su usuario...
+                  </div>
+                }
+
+              </div>
+
+
+              <!-- Contraseña -->
+              <div class="mb-4">
+
+                <label for="password" class="form-label fw-semibold">
+                  Contraseña
+                </label>
+
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="••••••••"
+                  formControlName="password"
+                  [class.is-invalid]="invalido('password')"
+                >
+
+                @if (invalido('password')) {
+                  <div class="invalid-feedback">
+                    La contraseña es requerida...
+                  </div>
+                }
+
+              </div>
+
+
+              @if (error()) {
+                <p class="error">{{ error() }}</p>
+              }
+
+              <button type="submit" [disabled]="loading()">
+                {{ loading() ? 'Ingresando..' : 'Ingresar'}}
+              </button>
+
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

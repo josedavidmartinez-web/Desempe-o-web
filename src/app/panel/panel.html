@@ -1,0 +1,43 @@
+<div class="container my-4" style="max-width: 800px;">
+  
+  <form (ngSubmit)="save()" class="card p-4 bg-light shadow-sm mb-4">
+    <h3 class="h4 mb-3">{{ editingId() !== null ? 'Editar Post' : 'Crear Nuevo Post' }}</h3>
+    
+    <div class="mb-3">
+      <label class="form-label">Título:</label>
+      <input type="text" [(ngModel)]="form.title" name="title" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Contenido (Body):</label>
+      <textarea [(ngModel)]="form.body" name="body" class="form-control" rows="3" required></textarea>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <button type="submit" class="btn btn-primary">
+        {{ editingId() !== null ? 'Actualizar' : 'Guardar' }}
+      </button>
+      
+      @if (editingId() !== null) {
+        <button type="button" (click)="cancel()" class="btn btn-secondary ms-2">
+          Cancelar
+        </button>
+      }
+    </div>
+  </form>
+
+  <h3 class="h4 mb-3">Lista de Posts</h3>
+  <ul class="list-unstyled">
+    @for (post of posts(); track post.id) {
+      <li class="card p-3 shadow-sm mb-3">
+        <h4 class="h5 text-dark mb-2">{{ post.title }}</h4>
+        <p class="text-muted mb-3" style="font-size: 0.95rem;">{{ post.body }}</p>
+        
+        <div>
+          <button (click)="edit(post)" class="btn btn-warning btn-sm me-2 text-white">Editar</button>
+          <button (click)="delete(post.id)" class="btn btn-danger btn-sm">Eliminar</button>
+        </div>
+      </li>
+    }
+  </ul>
+</div>

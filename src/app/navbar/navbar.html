@@ -1,0 +1,12 @@
+<header class="header">
+  <h2>Bienvenido a tu red de confianza</h2>
+
+  <nav>
+    @if (auth.isAuthenticated()) {
+      <span>{{ auth.username() }}</span>
+      <button (click)="salir()">Salir</button>
+    } @else {
+      <a routerLink="/login">Ingresar</a>
+    }
+  </nav>
+</header>
